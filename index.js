@@ -3,10 +3,6 @@ import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
 
-/*************************************************************************************************************************************************
- * FIX BUGS!!!
- * **********************************************************************************************************************************************/
-
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
   if (!localStorage.getItem("tasks")) {
@@ -18,7 +14,46 @@ function initializeData() {
 }
 
 // TASK: Get elements from the DOM
-const elements = {};
+const elements = {
+  sideBarDiv: document.getElementById("side-bar-div"),
+  sideBarBottom: document.getElementsByClassName("side-bar-bottom"),
+  toggleDiv: document.getElementById("toggle-div"),
+  hideSideBarDiv: document.getElementById("hide-side-bar-div"),
+  hideSideBarBtn: document.getElementById("hide-side-bar-btn"),
+  showSideBarBtn: document.getElementById("show-side-bar-btn"),
+  themeSwitch: document.getElementById("label-checkbox-theme"),
+  header: document.getElementById("header"),
+  headerBoardName: document.getElementById("header-board-name"),
+  dropDownBtn: document.getElementById("dropdownbtn"),
+  addNewTaskBtn: document.getElementById("add-new-task-btn"),
+  editBoardBtn: document.getElementById("edit-board-btn"),
+  editBoardDiv: document.getElementById("editBoardDiv"),
+  deleteBoardBtn: document.getElementById("deleteBoardBtn"),
+  todoHeadDiv: document.getElementById("todo-head-div"),
+  toDoText: document.getElementById("toDoText"),
+  tasksContainers: document.getElementsByClassName("tasks-container"),
+  newTaskModalWindow: document.getElementById("new-task-modal-window"),
+  titleInput: document.getElementById("title-input"),
+  descInput: document.getElementById("desc-input"),
+  selectStatus: document.getElementById("select-status"),
+  createTaskBtn: document.getElementById("create-task-btn"),
+  cancelAddTaskBtn: document.getElementById("cancel-add-task-btn"),
+  editTaskModalWindow: document.querySelector(".edit-task-modal-window"),
+  editTaskForm: document.getElementById("edit-task-form"),
+  editTaskTitleInput: document.getElementById("edit-task-title-input"),
+  editTaskDescInput: document.getElementById("edit-task-desc-input"),
+  editSelectStatus: document.getElementById("edit-select-status"),
+  saveTaskChangesBtn: document.getElementById("save-task-changes-btn"),
+  cancelEditBtn: document.getElementById("cancel-edit-btn"),
+  deleteTaskBtn: document.getElementById("delete-task-btn"),
+  filterDiv: document.getElementById("filterDiv"),
+  modalWindow: document.getElementById("new-task-modal-window"),
+  //taskTitle: document.getElementById("title-input"),
+  //taskDesc: document.getElementById("desc-input"),
+  columnDivs: document.querySelectorAll(".column-div"),
+  headlineSisepanel: document.getElementById("headline-sidepanel"),
+  addNewTaskBtn: document.getElementById("add-new-task-btn"),
+};
 
 let activeBoard = "";
 
