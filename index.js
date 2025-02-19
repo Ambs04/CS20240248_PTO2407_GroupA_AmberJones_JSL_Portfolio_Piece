@@ -1,5 +1,5 @@
 // TASK: import helper functions from utils
-import "./utils/taskFunctions.js";
+//import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
 import {
@@ -305,41 +305,49 @@ function openEditTaskModal(task) {
     elements.editTaskModalWindow.style.display = "none";
   });
   // Call saveTaskChanges upon click of Save Changes button
+
   elements.saveTaskChangesBtn.addEventListener("click", () => {
-    saveTaskChanges(task.id);
+    let updatedTasks = {
+      title: elements.editTaskTitleInput.value,
+      description: elements.editTaskDescInput.value,
+      status: elements.editSelectStatus.value,
+    };
+    patchTask(task.id, updatedTasks);
+    elements.editTaskModalWindow.style.display = "none";
+    refreshTasksUI();
   });
   // Delete task using a helper function and close the task modal
   elements.deleteTaskBtn.addEventListener("click", () => {
     deleteTask(task.id);
     elements.editTaskModalWindow.style.display = "none";
     // console.log(initialData);
-    //refreshTasksUI;
+    refreshTasksUI;
   });
 
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
 
-function saveTaskChanges(taskId) {
-  // Get new user inputs
+// function saveTaskChanges(taskId) {
+//   // Get new user inputs
 
-  const title = elements.editTaskTitleInput.value;
-  const description = elements.editTaskDescInput.value;
-  const status = elements.editSelectStatus.value;
+//   const title = elements.editTaskTitleInput.value;
+//   const description = elements.editTaskDescInput.value;
+//   const status = elements.editSelectStatus.value;
 
-  // Create an object with the updated task details
-  let updatedTask = {
-    title: elements.editTaskTitleInput.value,
-    description: elements.editTaskDescInput.value,
-    status: elements.editSelectStatus.value,
-  };
+//   // Create an object with the updated task details
+//   let updatedTask = {
+//     title: elements.editTaskTitleInput.value,
+//     description: elements.editTaskDescInput.value,
+//     status: elements.editSelectStatus.value,
+//   };
 
-  // Update task using a helper function
-  patchTask(taskId, updatedTask);
+//   // Update task using a helper function
+//   patchTask(taskId, updatedTask);
 
-  // Close the modal and refresh the UI to reflect the changes
-  elements.editTaskModalWindow.style.display = "none";
-  refreshTasksUI();
-}
+//   // Close the modal and refresh the UI to reflect the changes
+//   elements.editTaskModalWindow.style.display = "none";
+//   refreshTasksUI();
+// }
 
 /*************************************************************************************************************************************************/
 
