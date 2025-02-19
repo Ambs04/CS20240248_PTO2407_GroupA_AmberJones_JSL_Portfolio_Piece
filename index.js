@@ -206,7 +206,9 @@ function setupEventListeners() {
   });
 
   // Theme switch event listener
-  elements.themeSwitch.addEventListener("change", toggleTheme);
+  elements.themeSwitch.addEventListener("change", () => {
+    toggleTheme();
+  });
 
   // Show Add New Task Modal event listener
   elements.addNewTaskBtn.addEventListener("click", () => {
@@ -258,7 +260,26 @@ function addTask(event) {
 
 function toggleSidebar(show) {}
 
-function toggleTheme() {}
+let activeTheme = localStorage.getItem("theme");
+
+function toggleTheme() {
+  if (activeTheme === "dark") {
+    activeTheme = "dark";
+  } else {
+    activeTheme = "light";
+  }
+  localStorage.setItem("theme", activeTheme);
+  applyTheme();
+  console.log(activeTheme);
+}
+
+function applyTheme() {
+  if (activeTheme === "light") {
+    document.body.classList.add("light-theme");
+  } else {
+    document.body.classList.remove("light-theme");
+  }
+}
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
@@ -297,7 +318,8 @@ function init() {
   setupEventListeners();
   const showSidebar = localStorage.getItem("showSideBar") === "true";
   toggleSidebar(showSidebar);
-  const isLightTheme = localStorage.getItem("light-theme") === "enabled";
-  document.body.classList.toggle("light-theme", isLightTheme);
+  // const isLightTheme = localStorage.getItem("light-theme") === "enabled";
+  // document.body.classList.toggle("light-theme", isLightTheme);
+  applyTheme();
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
