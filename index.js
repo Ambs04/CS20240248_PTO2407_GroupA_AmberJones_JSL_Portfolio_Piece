@@ -60,7 +60,7 @@ let activeBoard = "";
 // Extracts unique board names from tasks
 // TASK: FIX BUGS
 function fetchAndDisplayBoardsAndTasks() {
-  const tasks = getTasks();
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
   const boards = [...new Set(tasks.map((task) => task.board).filter(Boolean))];
   displayBoards(boards);
   if (boards.length > 0) {
@@ -95,8 +95,8 @@ function displayBoards(boards) {
 // Filters tasks corresponding to the board name and displays them on the DOM.
 // TASK: Fix Bugs
 function filterAndDisplayTasksByBoard(boardName) {
-  const tasks = getTasks(); // Fetch tasks from a simulated local storage function
-  const filteredTasks = tasks.filter((task) => (task.board = boardName));
+  const tasks = JSON.parse(localStorage.getItem("tasks")); // Fetch tasks from a simulated local storage function
+  const filteredTasks = tasks.filter((task) => task.board === boardName);
 
   // Ensure the column titles are set outside of this function or correctly initialized before this function runs
 
@@ -112,7 +112,7 @@ function filterAndDisplayTasksByBoard(boardName) {
     column.appendChild(tasksContainer);
 
     filteredTasks
-      .filter((task) => (task.status = status))
+      .filter((task) => task.status === status)
       .forEach((task) => {
         const taskElement = document.createElement("div");
         taskElement.classList.add("task-div");
@@ -204,7 +204,7 @@ function setupEventListeners() {
   elements.themeSwitch.addEventListener("change", toggleTheme);
 
   // Show Add New Task Modal event listener
-  elements.createNewTaskBtn.addEventListener("click", () => {
+  elements.createTaskBtn.addEventListener("click", () => {
     toggleModal(true);
     elements.filterDiv.style.display = "block"; // Also show the filter overlay
   });
