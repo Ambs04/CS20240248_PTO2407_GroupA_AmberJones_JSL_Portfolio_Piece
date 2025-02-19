@@ -197,6 +197,8 @@ function setupEventListeners() {
   // Show sidebar event listener
   elements.hideSideBarBtn.addEventListener("click", () => {
     toggleSidebar(false);
+    elements.sideBarDiv.style.display = "none";
+    elements.showSideBarBtn.style.display = "block";
   });
   elements.showSideBarBtn.addEventListener("click", () => {
     toggleSidebar(true);
