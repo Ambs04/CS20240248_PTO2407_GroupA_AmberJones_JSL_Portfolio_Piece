@@ -51,8 +51,8 @@ const elements = {
   //taskTitle: document.getElementById("title-input"),
   //taskDesc: document.getElementById("desc-input"),
   columnDivs: document.querySelectorAll(".column-div"),
-  headlineSisepanel: document.getElementById("headline-sidepanel"),
-  addNewTaskBtn: document.getElementById("add-new-task-btn"),
+  headlineSidepanel: document.getElementById("headline-sidepanel"),
+  //addNewTaskBtn: document.getElementById("add-new-task-btn"),
 };
 
 console.log(initialData);
@@ -149,7 +149,7 @@ function styleActiveBoard(boardName) {
 
 function addTaskToUI(task) {
   const column = document.querySelector(
-    '.column-div[data-status="${task.status}"]'
+    `.column-div[data-status="${task.status}"]`
   );
   if (!column) {
     console.error(`Column not found for status: ${task.status}`);
@@ -215,7 +215,7 @@ function setupEventListeners() {
   });
 
   // Add new task form submission event listener
-  elements.modalWindow.addEventListener("submit", (event) => {
+  elements.modalWindow.addEventListener("submit", function (event) {
     addTask(event);
   });
 }
@@ -232,7 +232,7 @@ function toggleModal(show, modal = elements.modalWindow) {
 
 function addTask(event) {
   event.preventDefault();
-  const tasks = JSON.parse(localStroage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
   const nextId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
   //Assign user input to the task object
   const newTask = {
