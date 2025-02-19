@@ -247,13 +247,12 @@ function addTask(event) {
   if (newTask) {
     addTaskToUI(newTask);
     tasks.push(newTask);
-
+    localStorage.setItem("tasks", JSON.stringify(tasks));
     console.log(tasks);
     toggleModal(false);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
     event.target.reset();
     refreshTasksUI();
-    localStorage.setItems("tasks", JSON.stringify(tasks));
   }
 }
 
