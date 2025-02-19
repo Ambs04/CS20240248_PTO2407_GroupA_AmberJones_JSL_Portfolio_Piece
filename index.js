@@ -2,6 +2,7 @@
 import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
+import { deleteTask } from "./utils/taskFunctions.js";
 
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
@@ -239,7 +240,7 @@ function addTask(event) {
   const nextId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
   //Assign user input to the task object
   const newTask = {
-    id: nextId,
+    id: nextId + 1,
     title: elements.titleInput.value,
     description: elements.descInput.value,
     status: elements.selectStatus.value,
@@ -291,6 +292,12 @@ function openEditTaskModal(task) {
   // Call saveTaskChanges upon click of Save Changes button
 
   // Delete task using a helper function and close the task modal
+  elements.deleteTaskBtn.addEventListener("click", () => {
+    deleteTask(task.id);
+    elements.editTaskModalWindow.style.display = "none";
+    console.log(initialData);
+    refreshTasksUI;
+  });
 
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
