@@ -231,8 +231,13 @@ function addTask(event) {
   event.preventDefault();
 
   //Assign user input to the task object
-  const task = {};
-  const newTask = createNewTask(task);
+  const newTask = {
+    title: elements.titleInput.value,
+    description: elements.descInput.value,
+    status: elements.selectStatus.value,
+    board: activeBoard,
+  };
+
   if (newTask) {
     addTaskToUI(newTask);
     toggleModal(false);
