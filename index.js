@@ -2,7 +2,14 @@
 import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
-import { deleteTask } from "./utils/taskFunctions.js";
+import {
+  saveTasks,
+  getTasks,
+  createNewTask,
+  patchTask,
+  putTask,
+  deleteTask,
+} from "./utils/taskFunctions.js";
 
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
@@ -287,7 +294,7 @@ function applyTheme() {
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  //const tasks = JSON.parse(localStorage.getItem("tasks"));
+
   // console.log(tasks);
   elements.editTaskTitleInput.value = task.title;
   elements.editTaskDescInput.value = task.description;
@@ -299,13 +306,13 @@ function openEditTaskModal(task) {
   });
   // Call saveTaskChanges upon click of Save Changes button
   elements.saveTaskChangesBtn.addEventListener("click", () => {
-    saveTaskChanges();
+    saveTaskChanges(task.id);
   });
   // Delete task using a helper function and close the task modal
   elements.deleteTaskBtn.addEventListener("click", () => {
     deleteTask(task.id);
     elements.editTaskModalWindow.style.display = "none";
-    console.log(initialData);
+    // console.log(initialData);
     //refreshTasksUI;
   });
 
@@ -314,23 +321,19 @@ function openEditTaskModal(task) {
 
 function saveTaskChanges(taskId) {
   // Get new user inputs
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
-  // localStorage.setItem("tasks", JSON.stringify(updatedTask));
 
   const title = elements.editTaskTitleInput.value;
   const description = elements.editTaskDescInput.value;
   const status = elements.editSelectStatus.value;
 
   // Create an object with the updated task details
-
   let updatedTask = {
-    title: title,
-    description: description,
-    status: status,
+    title: elements.editTaskTitleInput.value,
+    description: elements.editTaskDescInput.value,
+    status: elements.editSelectStatus.value,
   };
 
   // Update task using a helper function
-
   patchTask(taskId, updatedTask);
 
   // Close the modal and refresh the UI to reflect the changes
