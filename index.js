@@ -221,6 +221,7 @@ function setupEventListeners() {
   elements.modalWindow.addEventListener("submit", function (event) {
     addTask(event);
     elements.modalWindow.style.display = "none";
+    console.log(initialData);
   });
 }
 
@@ -238,9 +239,11 @@ function addTask(event) {
   event.preventDefault();
   const tasks = JSON.parse(localStorage.getItem("tasks"));
   const nextId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
+
+  console.log(nextId);
   //Assign user input to the task object
   const newTask = {
-    id: nextId + 1,
+    id: nextId,
     title: elements.titleInput.value,
     description: elements.descInput.value,
     status: elements.selectStatus.value,
@@ -251,7 +254,7 @@ function addTask(event) {
     addTaskToUI(newTask);
     tasks.push(newTask);
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    console.log(tasks);
+    //console.log(tasks);
     toggleModal(false);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
     event.target.reset();
@@ -284,6 +287,11 @@ function applyTheme() {
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
+  // const tasks = JSON.parse(localStorage.getItem("tasks"));
+  // console.log(tasks);
+  elements.editTaskTitleInput.value = task.title;
+  elements.editTaskDescInput.value = task.description;
+  elements.editSelectStatus.value = task.status;
 
   // Get button elements from the task modal
   elements.cancelEditBtn.addEventListener("click", () => {
