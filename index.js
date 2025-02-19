@@ -32,7 +32,7 @@ const elements = {
   todoHeadDiv: document.getElementById("todo-head-div"),
   toDoText: document.getElementById("toDoText"),
   tasksContainers: document.getElementsByClassName("tasks-container"),
-  newTaskModalWindow: document.getElementById("new-task-modal-window"),
+  //newTaskModalWindow: document.getElementById("new-task-modal-window"),
   titleInput: document.getElementById("title-input"),
   descInput: document.getElementById("desc-input"),
   selectStatus: document.getElementById("select-status"),
@@ -168,7 +168,7 @@ function addTaskToUI(task) {
 
   const taskElement = document.createElement("div");
   taskElement.className = "task-div";
-  taskElement.textContent = task.title; // Modify as needed
+  taskElement.innerHTML = `${task.title}`; // Modify as needed
   taskElement.setAttribute("data-task-id", task.id);
 
   tasksContainer.appendChild(taskElement);
@@ -217,6 +217,7 @@ function setupEventListeners() {
   // Add new task form submission event listener
   elements.modalWindow.addEventListener("submit", function (event) {
     addTask(event);
+    elements.modalWindow.style.display = "none";
   });
 }
 
@@ -246,11 +247,13 @@ function addTask(event) {
   if (newTask) {
     addTaskToUI(newTask);
     tasks.push(newTask);
-    localStorage.setItems("tasks", JSON.stringify(tasks));
+
+    console.log(tasks);
     toggleModal(false);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
     event.target.reset();
     refreshTasksUI();
+    localStorage.setItems("tasks", JSON.stringify(tasks));
   }
 }
 
