@@ -2,7 +2,7 @@
 import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
-import { deleteTask } from "./utils/taskFunctions.js";
+import { deleteTask, patchTask } from "./utils/taskFunctions.js";
 
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
@@ -287,7 +287,7 @@ function applyTheme() {
 
 function openEditTaskModal(task) {
   // Set task details in modal inputs
-  // const tasks = JSON.parse(localStorage.getItem("tasks"));
+  //const tasks = JSON.parse(localStorage.getItem("tasks"));
   // console.log(tasks);
   elements.editTaskTitleInput.value = task.title;
   elements.editTaskDescInput.value = task.description;
@@ -298,27 +298,39 @@ function openEditTaskModal(task) {
     elements.editTaskModalWindow.style.display = "none";
   });
   // Call saveTaskChanges upon click of Save Changes button
-
+  elements.saveTaskChangesBtn.addEventListener("click", () => {
+    saveTaskChanges();
+  });
   // Delete task using a helper function and close the task modal
   elements.deleteTaskBtn.addEventListener("click", () => {
     deleteTask(task.id);
     elements.editTaskModalWindow.style.display = "none";
     console.log(initialData);
-    refreshTasksUI;
+    //refreshTasksUI;
   });
 
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
 
 function saveTaskChanges(taskId) {
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+
   // Get new user inputs
+  const title = elements.editTaskTitleInput.value;
+  const description = elements.editTaskDescInput.value;
+  const status = elements.editSelectStatus.value;
 
   // Create an object with the updated task details
+  const updatedTask = {
+    title: title,
+    description: description,
+    status: status,
+  };
 
-  // Update task using a hlper functoin
-
+  // Update task using a helper functoin
+  patchTask(tasks.id, updatedTask);
   // Close the modal and refresh the UI to reflect the changes
-
+  elements.editTaskModalWindow.style.display = "none";
   refreshTasksUI();
 }
 
