@@ -242,6 +242,8 @@ function addTask(event) {
 
   if (newTask) {
     addTaskToUI(newTask);
+    tasks.push(newTask);
+    localStorage.setItems("tasks", JSON.stringify(tasks));
     toggleModal(false);
     elements.filterDiv.style.display = "none"; // Also hide the filter overlay
     event.target.reset();
