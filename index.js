@@ -2,7 +2,7 @@
 import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
-import { deleteTask, patchTask } from "./utils/taskFunctions.js";
+import { deleteTask } from "./utils/taskFunctions.js";
 
 // Function checks if local storage already has data, if not it loads initialData to localStorage
 function initializeData() {
@@ -299,7 +299,7 @@ function openEditTaskModal(task) {
   });
   // Call saveTaskChanges upon click of Save Changes button
   elements.saveTaskChangesBtn.addEventListener("click", () => {
-    saveTaskChanges();
+    patchTask(task.id);
   });
   // Delete task using a helper function and close the task modal
   elements.deleteTaskBtn.addEventListener("click", () => {
@@ -312,23 +312,37 @@ function openEditTaskModal(task) {
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
 
-function saveTaskChanges(taskId) {
+function patchTask(taskId) {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
 
-  // Get new user inputs
-  const title = elements.editTaskTitleInput.value;
-  const description = elements.editTaskDescInput.value;
-  const status = elements.editSelectStatus.value;
+  let editTask = tasks.find((task) => task.id === taskId);
 
-  // Create an object with the updated task details
-  const updatedTask = {
-    title: title,
-    description: description,
-    status: status,
+  let updatedTask = {
+    title: elements.editTaskTitleInput.value,
+    description: elements.editTaskDescInput.value,
+    status: elements.editSelectStatus.value,
   };
 
+  editTask.title = updatedTask.title || editTask.title;
+  editTask.description = updatedTask.description || editTask.description;
+  editTask.status = updatedTask.status || editTask.status;
+
+  saveTaskChanges(tasks);
+}
+
+function saveTaskChanges(taskId) {
+  // Get new user inputs
+
+  localStorage.setItem("tasks", JSON.stringify(updatedTask));
+
+  // const title = elements.editTaskTitleInput.value;
+  // const description = elements.editTaskDescInput.value;
+  // const status = elements.editSelectStatus.value;
+
+  // Create an object with the updated task details
+
   // Update task using a helper functoin
-  patchTask(tasks.id, updatedTask);
+  //patchTask(tasks.id, updatedTask);
   // Close the modal and refresh the UI to reflect the changes
   elements.editTaskModalWindow.style.display = "none";
   refreshTasksUI();
