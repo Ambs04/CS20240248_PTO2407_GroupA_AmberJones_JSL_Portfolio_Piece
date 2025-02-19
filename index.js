@@ -207,9 +207,7 @@ function setupEventListeners() {
   });
 
   // Theme switch event listener
-  elements.themeSwitch.addEventListener("click", () => {
-    toggleTheme();
-  });
+  elements.themeSwitch.addEventListener("click", toggleTheme);
 
   // Show Add New Task Modal event listener
   elements.addNewTaskBtn.addEventListener("click", () => {
@@ -267,9 +265,9 @@ function toggleSidebar(show) {}
 let activeTheme = localStorage.getItem("theme");
 
 function toggleTheme() {
-  if (activeTheme === "dark") {
+  if (activeTheme === "light") {
     activeTheme = "dark";
-  } else {
+  } else if (activeTheme === "dark") {
     activeTheme = "light";
   }
   localStorage.setItem("theme", activeTheme);
@@ -331,7 +329,7 @@ function saveTaskChanges(taskId) {
 
   // Update task using a helper function
 
-  //patchTask(tasks.id, updatedTask);
+  patchTask(taskId, updatedTask);
 
   // Close the modal and refresh the UI to reflect the changes
   elements.editTaskModalWindow.style.display = "none";
