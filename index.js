@@ -207,7 +207,7 @@ function setupEventListeners() {
   });
 
   // Theme switch event listener
-  elements.themeSwitch.addEventListener("change", () => {
+  elements.themeSwitch.addEventListener("click", () => {
     toggleTheme();
   });
 
@@ -299,7 +299,7 @@ function openEditTaskModal(task) {
   });
   // Call saveTaskChanges upon click of Save Changes button
   elements.saveTaskChangesBtn.addEventListener("click", () => {
-    patchTask(task.id);
+    saveTaskChanges();
   });
   // Delete task using a helper function and close the task modal
   elements.deleteTaskBtn.addEventListener("click", () => {
@@ -312,37 +312,27 @@ function openEditTaskModal(task) {
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
 
-function patchTask(taskId) {
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
-
-  let editTask = tasks.find((task) => task.id === taskId);
-
-  let updatedTask = {
-    title: elements.editTaskTitleInput.value,
-    description: elements.editTaskDescInput.value,
-    status: elements.editSelectStatus.value,
-  };
-
-  editTask.title = updatedTask.title || editTask.title;
-  editTask.description = updatedTask.description || editTask.description;
-  editTask.status = updatedTask.status || editTask.status;
-
-  saveTaskChanges(tasks);
-}
-
 function saveTaskChanges(taskId) {
   // Get new user inputs
+  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  // localStorage.setItem("tasks", JSON.stringify(updatedTask));
 
-  localStorage.setItem("tasks", JSON.stringify(updatedTask));
-
-  // const title = elements.editTaskTitleInput.value;
-  // const description = elements.editTaskDescInput.value;
-  // const status = elements.editSelectStatus.value;
+  const title = elements.editTaskTitleInput.value;
+  const description = elements.editTaskDescInput.value;
+  const status = elements.editSelectStatus.value;
 
   // Create an object with the updated task details
 
-  // Update task using a helper functoin
+  let updatedTask = {
+    title: title,
+    description: description,
+    status: status,
+  };
+
+  // Update task using a helper function
+
   //patchTask(tasks.id, updatedTask);
+
   // Close the modal and refresh the UI to reflect the changes
   elements.editTaskModalWindow.style.display = "none";
   refreshTasksUI();
