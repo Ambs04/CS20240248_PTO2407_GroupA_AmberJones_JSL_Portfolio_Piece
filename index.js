@@ -202,6 +202,7 @@ function setupEventListeners() {
   });
   elements.showSideBarBtn.addEventListener("click", () => {
     toggleSidebar(true);
+    elements.sideBarDiv.style.display = "block";
   });
 
   // Theme switch event listener
