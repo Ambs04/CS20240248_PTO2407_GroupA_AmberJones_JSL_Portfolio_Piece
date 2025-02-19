@@ -260,7 +260,9 @@ function addTask(event) {
   }
 }
 
-function toggleSidebar(show) {}
+function toggleSidebar(show) {
+  elements.showSideBarBtn.style.display = "none";
+}
 
 let activeTheme = localStorage.getItem("theme");
 
@@ -272,7 +274,7 @@ function toggleTheme() {
   }
   localStorage.setItem("theme", activeTheme);
   applyTheme();
-  console.log(activeTheme);
+  //console.log(activeTheme);
 }
 
 function applyTheme() {
