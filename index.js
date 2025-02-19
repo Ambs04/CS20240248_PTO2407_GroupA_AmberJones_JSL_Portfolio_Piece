@@ -262,7 +262,9 @@ function openEditTaskModal(task) {
   // Set task details in modal inputs
 
   // Get button elements from the task modal
-
+  elements.cancelEditBtn.addEventListener("click", () => {
+    elements.editTaskModalWindow.style.display = "none";
+  });
   // Call saveTaskChanges upon click of Save Changes button
 
   // Delete task using a helper function and close the task modal
