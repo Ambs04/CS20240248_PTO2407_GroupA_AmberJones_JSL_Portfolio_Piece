@@ -229,9 +229,11 @@ function toggleModal(show, modal = elements.modalWindow) {
 
 function addTask(event) {
   event.preventDefault();
-
+  const tasks = JSON.parse(localStroage.getItem("tasks"));
+  const nextId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
   //Assign user input to the task object
   const newTask = {
+    id: nextId,
     title: elements.titleInput.value,
     description: elements.descInput.value,
     status: elements.selectStatus.value,
