@@ -312,10 +312,8 @@ function openEditTaskModal(task) {
     if (window.confirm("Are you sure you want to delete this task?")) {
       deleteTask(task.id);
       elements.editTaskModalWindow.style.display = "none";
+      refreshTasksUI();
     }
-
-    // console.log(initialData);
-    //refreshTasksUI;
   });
 
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
