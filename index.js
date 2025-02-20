@@ -243,12 +243,9 @@ function toggleModal(show, modal = elements.modalWindow) {
 function addTask(event) {
   event.preventDefault();
   const tasks = JSON.parse(localStorage.getItem("tasks"));
-  const nextId = tasks.reduce((max, task) => Math.max(max, task.id), 0);
 
-  console.log(nextId);
   //Assign user input to the task object
   const newTask = {
-    id: nextId,
     title: elements.titleInput.value,
     description: elements.descInput.value,
     status: elements.selectStatus.value,
@@ -312,8 +309,14 @@ function openEditTaskModal(task) {
       description: elements.editTaskDescInput.value,
       status: elements.editSelectStatus.value,
     };
+
+    task.title = updatedTasks.title;
+    task.description = updatedTasks.description;
+    task.status = updatedTasks.status;
+
     patchTask(task.id, updatedTasks);
     elements.editTaskModalWindow.style.display = "none";
+
     refreshTasksUI();
   });
   // Delete task using a helper function and close the task modal
@@ -321,7 +324,7 @@ function openEditTaskModal(task) {
     deleteTask(task.id);
     elements.editTaskModalWindow.style.display = "none";
     // console.log(initialData);
-    refreshTasksUI;
+    //refreshTasksUI;
   });
 
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
