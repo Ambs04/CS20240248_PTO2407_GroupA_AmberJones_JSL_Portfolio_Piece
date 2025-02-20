@@ -1,7 +1,6 @@
-// TASK: import helper functions from utils
-//import "./utils/taskFunctions.js";
 // TASK: import initialData
 import { initialData } from "./initialData.js";
+// TASK: import helper functions from utils
 import {
   saveTasks,
   getTasks,
@@ -40,7 +39,6 @@ const elements = {
   todoHeadDiv: document.getElementById("todo-head-div"),
   toDoText: document.getElementById("toDoText"),
   tasksContainers: document.getElementsByClassName("tasks-container"),
-  //newTaskModalWindow: document.getElementById("new-task-modal-window"),
   titleInput: document.getElementById("title-input"),
   descInput: document.getElementById("desc-input"),
   selectStatus: document.getElementById("select-status"),
@@ -56,18 +54,14 @@ const elements = {
   deleteTaskBtn: document.getElementById("delete-task-btn"),
   filterDiv: document.getElementById("filterDiv"),
   modalWindow: document.getElementById("new-task-modal-window"),
-  //taskTitle: document.getElementById("title-input"),
-  //taskDesc: document.getElementById("desc-input"),
   columnDivs: document.querySelectorAll(".column-div"),
   headlineSidepanel: document.getElementById("headline-sidepanel"),
-  //addNewTaskBtn: document.getElementById("add-new-task-btn"),
 };
 
 console.log(initialData);
 let activeBoard = "";
 
 // Extracts unique board names from tasks
-// TASK: FIX BUGS
 function fetchAndDisplayBoardsAndTasks() {
   const tasks = JSON.parse(localStorage.getItem("tasks"));
   const boards = [...new Set(tasks.map((task) => task.board).filter(Boolean))];
@@ -83,7 +77,6 @@ function fetchAndDisplayBoardsAndTasks() {
 }
 
 // Creates different boards in the DOM
-// TASK: Fix Bugs
 function displayBoards(boards) {
   const boardsContainer = document.getElementById("boards-nav-links-div");
   boardsContainer.innerHTML = ""; // Clears the container
@@ -144,7 +137,6 @@ function refreshTasksUI() {
 }
 
 // Styles the active board by adding an active class
-// TASK: Fix Bugs
 function styleActiveBoard(boardName) {
   document.querySelectorAll(".board-btn").forEach((btn) => {
     if (btn.textContent === boardName) {
@@ -231,14 +223,10 @@ function setupEventListeners() {
 }
 
 // Toggles tasks modal
-// Task: Fix bugs
+
 function toggleModal(show, modal = elements.modalWindow) {
   modal.style.display = show ? "block" : "none";
 }
-
-/*************************************************************************************************************************************************
- * COMPLETE FUNCTION CODE
- * **********************************************************************************************************************************************/
 
 function addTask(event) {
   event.preventDefault();
@@ -330,28 +318,6 @@ function openEditTaskModal(task) {
   toggleModal(true, elements.editTaskModalWindow); // Show the edit task modal
 }
 
-// function saveTaskChanges(taskId) {
-//   // Get new user inputs
-
-//   const title = elements.editTaskTitleInput.value;
-//   const description = elements.editTaskDescInput.value;
-//   const status = elements.editSelectStatus.value;
-
-//   // Create an object with the updated task details
-//   let updatedTask = {
-//     title: elements.editTaskTitleInput.value,
-//     description: elements.editTaskDescInput.value,
-//     status: elements.editSelectStatus.value,
-//   };
-
-//   // Update task using a helper function
-//   patchTask(taskId, updatedTask);
-
-//   // Close the modal and refresh the UI to reflect the changes
-//   elements.editTaskModalWindow.style.display = "none";
-//   refreshTasksUI();
-// }
-
 /*************************************************************************************************************************************************/
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -363,8 +329,6 @@ function init() {
   setupEventListeners();
   const showSidebar = localStorage.getItem("showSideBar") === "true";
   toggleSidebar(showSidebar);
-  // const isLightTheme = localStorage.getItem("light-theme") === "enabled";
-  // document.body.classList.toggle("light-theme", isLightTheme);
   applyTheme();
   fetchAndDisplayBoardsAndTasks(); // Initial display of boards and tasks
 }
