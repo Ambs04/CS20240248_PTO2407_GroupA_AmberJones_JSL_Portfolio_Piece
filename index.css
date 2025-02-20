@@ -429,7 +429,7 @@ header {
 }
 
 #three-dots-icon {
-  display: inline;
+  display: none;
   font-size: 35px;
   font-weight: 800;
 }
