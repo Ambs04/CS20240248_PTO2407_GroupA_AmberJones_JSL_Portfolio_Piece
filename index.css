@@ -295,8 +295,11 @@ header {
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  margin-top: auto;
-  margin-bottom: 40px;
+  /* margin-top: auto;
+  margin-bottom: 40px;*/
+  position: absolute;
+  bottom: 45px;
+  left: 15px;
 }
 
 /* Edit task */
