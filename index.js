@@ -309,8 +309,11 @@ function openEditTaskModal(task) {
   });
   // Delete task using a helper function and close the task modal
   elements.deleteTaskBtn.addEventListener("click", () => {
-    deleteTask(task.id);
-    elements.editTaskModalWindow.style.display = "none";
+    if (window.confirm("Are you sure you want to delete this task?")) {
+      deleteTask(task.id);
+      elements.editTaskModalWindow.style.display = "none";
+    }
+
     // console.log(initialData);
     //refreshTasksUI;
   });
